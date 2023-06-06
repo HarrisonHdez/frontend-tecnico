@@ -19,7 +19,7 @@
         
         <div class="input-container">
           <input type="text" bind:value={inputValue} class="input" placeholder="Ingrese un valor" />
-          <button on:click={handleAdd} class="button">Add</button>
+          <button aria-label="Agregar Tarea" on:click={handleAdd} class="button">Add</button>
         </div>
 
         <p class="card__result">Total Todos: 0 | Completed Todos: 0</p>

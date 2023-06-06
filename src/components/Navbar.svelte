@@ -6,7 +6,7 @@
   ];
 </script>
 
-<nav class="nav">
+<nav class="nav" aria-label="Barra principal">
     <div class="nav__content container">
 
         <div class="nav__logo-container">

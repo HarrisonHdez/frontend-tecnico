@@ -5,7 +5,7 @@
     let currentYear = new Date().getFullYear();
 </script>
 
-<footer class="footer">
+<footer class="footer" aria-label="Pie de página">
   <div class="footer__content container">
     <h4 class="footer__title">{companyName}</h4>
     <div class="footer__paragraph-container">
