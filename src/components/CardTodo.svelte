@@ -1,6 +1,7 @@
 <script>
+  import Quote from './Quote.svelte';
+
   let title = 'TaskMaster';
-  let description = '';
   let inputValue = '';
 
   function handleAdd() {
@@ -15,88 +16,111 @@
     <div class="card__content-container">
       <div class="card__content">
         <h1 class="card__title">{title}</h1>
-        <p class="description">{description}</p>
         
-        <div class="input-container">
-          <input type="text" bind:value={inputValue} class="input" placeholder="Ingrese un valor" />
+        <div class="card__input-container">
+          <input type="text" bind:value={inputValue} class="input" placeholder="Add a new todo..." />
           <button aria-label="Agregar Tarea" on:click={handleAdd} class="button">Add</button>
         </div>
 
         <p class="card__result">Total Todos: 0 | Completed Todos: 0</p>
-        <p class="card__paragraph">"I think it is possible for ordinary people to choose to be extraordinary." - Elon Musk</p>
+        
+        <Quote />
+
+        
       </div>
     </div>
 </div>
 
 <style>
 .card {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  padding: 50px 0;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
  
 .card__content-container {
-    max-width: 512px;
-    width: 100%;
-    min-height: 283px;
-    height: auto;
-    background-color: var(--primary-color);
-    border-radius: 8px;
+  max-width: 512px;
+  width: 100%;
+  height: auto;
+  background-color: var(--primary-color);
+  border-radius: 8px;
 
-    box-shadow: 0px 0px 80px 10px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0px 0px 80px 10px rgba(0, 0, 0, 0.2); 
 
 }
 .card__content {
-    height: 100%;
-    padding: 24px;
+  padding: 24px;
+
+  min-height: 283px;
+  height: auto;
 }
 
 .card__title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: var(--text-color);
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: var(--text-color);
 
-    font-family: 'Lato', sans-serif;
-    font-weight: 900;
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
 }
 
-  .description {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
 
-  .input-container {
-    display: flex;
-    align-items: center;
-  }
+.card__input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
 
-  .input {
-    flex-grow: 1;
-    height: 30px;
-    margin-right: 10px;
-    padding: 4px 8px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
+.input {
+  flex-grow: 1;
+  font-size: 16px;
+  height: 43px;
+  padding: 8px;
+  
+  border: 2px solid #9CA3AF;
+  box-sizing: border-box;
+  background-color: var(--input-color);
+  border-radius: 6px 0 0 6px;
+  outline: none
+}
+input::placeholder {
+    color: #9CA3AF;
+}
+input {
+  caret-color: white;
+}
+.button {
+  background-color: #3B82F6;
+  color: #fff;
+  height: 43px;
+  border: none;
+  padding: 0px 24px;
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
 
-  .button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-  }
+  font-size: 16px;
+
+}
+.button:hover {
+  background-color: #2563EB;
+}
 
 
 
 
 .card__result {
-    color: #fff;
+  color: var(--text-color);
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
-.card__paragraph {
-    color: #fff;
-}
+
 </style>
 
 

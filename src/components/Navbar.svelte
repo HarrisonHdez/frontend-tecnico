@@ -57,8 +57,8 @@
     padding: 4px;
     cursor: pointer;
 
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
 }
 
 .nav__icon {

@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300;1,400&display=swap');
 
 :root {
   --primary-color: #1F2937;
   --body-color: #111827;
   --text-color: white;
   --paragraph-color: #9CA3AF;
+  --input-color: #374151;
 }
+
+
 ::-moz-scrollbar {
   width: 10px;
 }
@@ -43,6 +45,7 @@
 body {
   min-height: 100vh;
   background-color: var(--body-color) ;
+  height: auto;
 }
 
 .container {
