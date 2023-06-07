@@ -19,7 +19,7 @@
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5a2plcGdodW56dGxxb3N0aGhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYxMDE2MjYsImV4cCI6MjAwMTY3NzYyNn0.EosyWz-QnOzX3A7QutwKCg_zhtuV1-rjWgY6TA6TUbY';
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-
+  let completedTodos = 0;
   let totalTodos = 0;
 
   let newTask = '';
@@ -39,17 +39,28 @@
   }
 
   async function fetchTasks() {
-    const { data, error } = await supabase.from('todos').select('titlem');
+  const { data, error } = await supabase.from('todos').select('titlem, status');
 
-    if (error) {
-      console.error('Error al obtener las tareas:', error.message);
-    } else {
-      tasks = data;
-      totalTodos = data.length;
-    }
+  if (error) {
+    console.error('Error al obtener las tareas:', error.message);
+  } else {
+    tasks = data;
+    totalTodos = data.length;
+
+    // Contar el número de tareas completadas
+    completedTodos = tasks.filter(task => task.status).length;
   }
+}
+
+
+
 
   onMount(fetchTasks);
+
+  function updateCompletedTodos() {
+  completedTodos = tasks.filter(task => task.status).length;
+}
+
 
 
 
@@ -62,38 +73,81 @@
     console.log('Tarea eliminada exitosamente:', task);
     tasks = tasks.filter(t => t.titlem !== task.titlem);
     totalTodos--;
+    updateCompletedTodos();
   }
 }
+
+async function completeTask(task) {
+  const { data, error } = await supabase
+    .from('todos')
+    .update({ status: true })
+    .match({ titlem: task.titlem });
+
+  if (error) {
+    console.error('Error al marcar la tarea como completada:', error.message);
+  } else {
+    console.log('Tarea marcada como completada exitosamente:', task);
+    tasks = tasks.map(t => {
+      if (t.titlem === task.titlem) {
+        return { ...t, status: true };
+      }
+      return t;
+    });
+    updateCompletedTodos();
+  }
+}
+
+
+
 
 </script>
 
 <main>
 
   <form class="card__input-container" on:submit|preventDefault={addTask}>
-      <input class="input" type="text" bind:value={newTask} placeholder="Add new todo..." />
+      <input class="input" type="text" bind:value={newTask} placeholder="Add new todo..." required/>
     <button class="button" type="submit">Add</button>
   </form>
 
 
+
 <div class="container__task">
   <ul>
-    {#each tasks as task (task.titlem)}
-      <li class="content__task">{task.titlem}
-        <button class="button__delete" on:click={() => deleteTask(task)}>
-        <img src="svg/delete.svg" alt="delete icon"/>
-        </button>
+    {#each tasks as task }
+      <li class="content__task">
+        <span class={task.status ? 'completed-task' : ''}>{task.titlem}</span>
+        <div class="button__container">
+        
+        
+            {#if !task.status}
+            <button class="button__complete" on:click={() => completeTask(task)}>
+                <img src="svg/check.svg" alt="complete" />
+            </button>
+            {/if}
+            <button class="button__delete" on:click={() => deleteTask(task)}>
+                <img src="svg/delete.svg" alt="Delete" />
+            </button>
+        </div>
+
       </li>
     {/each}
   </ul>
-
-        
-
 </div>
-    <p class="card__result">Total Todos: {totalTodos} | Completed Todos: 0</p>
+
+
+
+
+
+    <p class="card__result">Total Todos: {totalTodos} | Completed Todos: {completedTodos}</p>
+
 </main>
 
 
 <style>
+.completed-task {
+  text-decoration: line-through;
+}
+
 .card__input-container {
   display: flex;
   align-items: center;
@@ -169,7 +223,16 @@ li:last-child {
   font-weight: 400;
   margin-bottom: 20px;
 }
-
+.button__container {
+    display: flex;
+    align-items: center;
+}
+.button__complete {
+     border: none;
+    background: none;
+    display: flex;
+    cursor: pointer;
+}
 .button__delete {
     border: none;
     background: none;
