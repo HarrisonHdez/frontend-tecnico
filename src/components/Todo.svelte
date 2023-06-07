@@ -25,7 +25,8 @@
   let newTask = '';
   let tasks = [];
 
-  async function addTask() {
+
+const addTask = async () => {
     const { data, error } = await supabase.from('todos').insert([{ titlem: newTask }]);
 
     if (error) {
@@ -35,11 +36,12 @@
       tasks = [{ titlem: newTask }, ...tasks];
       newTask = '';
       totalTodos++;
-    }
-  }
+    }      
+}
 
-  async function fetchTasks() {
-  const { data, error } = await supabase.from('todos').select('titlem, status');
+
+const fetchTasks = async () => {
+     const { data, error } = await supabase.from('todos').select('titlem, status');
 
   if (error) {
     console.error('Error al obtener las tareas:', error.message);
@@ -49,22 +51,22 @@
 
     // Contar el número de tareas completadas
     completedTodos = tasks.filter(task => task.status).length;
-  }
+  }     
 }
+
 
 
 
 
   onMount(fetchTasks);
 
-  function updateCompletedTodos() {
-  completedTodos = tasks.filter(task => task.status).length;
+
+const updateCompletedTodos = () => {
+    completedTodos = tasks.filter(task => task.status).length;
 }
 
 
-
-
-  async function deleteTask(task) {
+const deleteTask = async (task) => {
   const { error } = await supabase.from('todos').delete().match({ titlem: task.titlem });
 
   if (error) {
@@ -74,11 +76,12 @@
     tasks = tasks.filter(t => t.titlem !== task.titlem);
     totalTodos--;
     updateCompletedTodos();
-  }
+  }         
 }
 
-async function completeTask(task) {
-  const { data, error } = await supabase
+
+const completeTask = async (task) => {
+      const { data, error } = await supabase
     .from('todos')
     .update({ status: true })
     .match({ titlem: task.titlem });
@@ -94,8 +97,9 @@ async function completeTask(task) {
       return t;
     });
     updateCompletedTodos();
-  }
+  }    
 }
+
 
 
 

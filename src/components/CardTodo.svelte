@@ -1,11 +1,12 @@
 <script>
+
   import Quote from './Quote.svelte';
   import Todo from './Todo.svelte';
 
 
   let title = 'TaskMaster';
 
-
+  
   let inputValue = '';
 
   function handleAdd() {

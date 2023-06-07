@@ -14,6 +14,3 @@ yarn install
 ## Forma de Uso
 1. Una vez que hayas completado la instalación, puedes ejecutar la aplicación utilizando el siguiente comando:
 
-yarn dev
-
-
