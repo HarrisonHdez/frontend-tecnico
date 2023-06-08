@@ -7,7 +7,5 @@
 <main>
   <Navbar />
   <CardTodo />
-  <!-- Aquí puedes agregar el contenido principal de tu aplicación -->
-
   <Footer />
 </main>
