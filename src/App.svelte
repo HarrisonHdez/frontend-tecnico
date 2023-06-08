@@ -6,8 +6,6 @@
 
 <main>
   <Navbar />
-  
   <CardTodo />
-
   <Footer />
 </main>

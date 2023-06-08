@@ -1,16 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
   import { createClient } from '@supabase/supabase-js';
   import { onMount } from 'svelte';
