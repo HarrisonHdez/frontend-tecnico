@@ -7,15 +7,7 @@
   let title = 'TaskMaster';
 
   
-  let inputValue = '';
-
-  function handleAdd() {
-    // Acciones para agregar la tarea
-    console.log('Tarea agregada:', inputValue);
-    // Restablecer el valor del campo de entrada
-    inputValue = '';
-  }
-
+  
 
 </script>
 
