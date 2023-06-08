@@ -13,7 +13,6 @@
             <span class="nav__logo">TaskMaster</span>
         </div>
 
-        
 
         <div class="nav__icons">
             {#each icons as icon}

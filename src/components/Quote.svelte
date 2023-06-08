@@ -18,9 +18,7 @@
 
   <em class="card__paragraph">"{quote}"</em>  <span class="card__span"> - {author}</span>
 
-
 <style>
-
 
 .card__paragraph {
     color: var(--text-color);
