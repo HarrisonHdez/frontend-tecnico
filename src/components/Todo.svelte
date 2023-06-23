@@ -14,17 +14,18 @@
 
 
 const addTask = async () => {
-    const { data, error } = await supabase.from('todos').insert([{ titlem: newTask }]);
+  const result = await supabase.from('todos').insert([{ titlem: newTask }]);
 
-    if (error) {
-      console.error('Error al agregar la tarea:', error.message);
-    } else {
-      console.log('Tarea agregada exitosamente:', data);
-      tasks = [{ titlem: newTask }, ...tasks];
-      newTask = '';
-      totalTodos++;
-    }      
+  if (result.error) {
+    console.error('Error al agregar la tarea:', result.error.message);
+  } else {
+    console.log('Tarea agregada exitosamente');
+    tasks = [{ titlem: newTask }, ...tasks];
+    newTask = '';
+    totalTodos++;
+  }      
 }
+
 
 
 const fetchTasks = async () => {
