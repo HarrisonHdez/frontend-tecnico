@@ -55,10 +55,10 @@ const updateCompletedTodos = () => {
 
 
 const deleteTask = async (task) => {
-  const { error } = await supabase.from('todos').delete().match({ titlem: task.titlem });
+  const result = await supabase.from('todos').delete().match({ titlem: task.titlem });
 
-  if (error) {
-    console.error('Error al eliminar la tarea:', error.message);
+  if (result.error) {
+    console.error('Error al eliminar la tarea:', result.error.message);
   } else {
     console.log('Tarea eliminada exitosamente:', task);
     tasks = tasks.filter(t => t.titlem !== task.titlem);
@@ -68,14 +68,15 @@ const deleteTask = async (task) => {
 }
 
 
+
 const completeTask = async (task) => {
-      const { data, error } = await supabase
+  const result = await supabase
     .from('todos')
     .update({ status: true })
     .match({ titlem: task.titlem });
 
-  if (error) {
-    console.error('Error al marcar la tarea como completada:', error.message);
+  if (result.error) {
+    console.error('Error al marcar la tarea como completada:', result.error.message);
   } else {
     console.log('Tarea marcada como completada exitosamente:', task);
     tasks = tasks.map(t => {

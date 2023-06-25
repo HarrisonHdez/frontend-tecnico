@@ -17,7 +17,7 @@
         <h1 class="card__title">{title}</h1>
         
         
-        <Todo on:todoAdded={(event) => console.log('Todo added:', event.detail)} />
+        <Todo />
         
         <Quote />
 
